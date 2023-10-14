@@ -14,8 +14,8 @@ class Produk {
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
-        $this->$jmlHalaman = $jmlHalaman;
-        $this->$waktuMain = $waktuMain;
+        $this->jmlHalaman = $jmlHalaman;
+        $this->waktuMain = $waktuMain;
     }
 
     public function getLabel() {
@@ -23,8 +23,8 @@ class Produk {
     }
 
     public function getInfoProduk() {
-        // Komik : Naruto | Masashi Kishimoto, Shonen Jump (Rp. 30000) - 100 Halaman.
-        $str = "{$this->$tipe} : {$this->$judul} | {$this->$getLabel()} (Rp. {$this->$harga})";
+       $str = "{$this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
+
         return $str;
     }
 
@@ -32,16 +32,14 @@ class Produk {
 
 class Komik extends Produk {
     public function getInfoKomik() {
-        // Komik : Naruto | Masashi Kishimoto, Shonen Jump (Rp. 30000) - 100 Halaman.
-        $str = "Komik : {$this->getInfoProduk()} - {$this->$jmlHalaman} Halaman.";
+        $str = "Komik : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) - {$this->jmlHalaman} Halaman.";
         return $str;
     }
 }
 
 class Game extends Produk {
     public function getInfoGame() {
-        // Game : Uncharted | Neil Druckmann, Sony Computer (Rp. 250000) - 50 Jam.
-        $str = "Game : {$this->$judul} | {$this->$getLabel()} (Rp. {$this->$harga}) - {$this->$waktuMain} Jam.";
+        $str = "Game : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) ~  {$this->waktuMain} Jam.";
         return $str;
     }
 }
@@ -54,8 +52,8 @@ class CetakInfoProduk {
 }
 
 
-$produk1 = new Komik("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000, 100, 0, "Komik");
-$produk2 = new Game("Uncharted", "Neil Druckmann", "Sony Computer", 250000, 0, 50, "Game");
+$produk1 = new Komik("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000, 100, 0);
+$produk2 = new Game("Uncharted", "Neil Druckmann", "Sony Computer", 250000, 0, 50);
 
 echo $produk1->getInfoKomik();
 echo "<br>";

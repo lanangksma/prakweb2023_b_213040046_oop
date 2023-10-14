@@ -4,44 +4,57 @@ class Produk {
     public $judul,
         $penulis,
         $penerbit,
-        $harga,
-        $jmlHalaman,
-        $waktuMain;
+        $harga;
 
-    public function __construct($judul = "judul", $penulis = "penulis",
-                                $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0, $waktuMain = 0) {
+    public function __construct($judul = "Judul", $penulis = "Penulis", $penerbit = "Penerbit", $harga = 0)
+    {
         $this->judul = $judul;
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
-        $this->$jmlHalaman = $jmlHalaman;
-        $this->$waktuMain = $waktuMain;
     }
 
     public function getLabel() {
         return "$this->penulis, $this->penerbit";
     }
 
-    public function getInfoProduk() {
-        // Komik : Naruto | Masashi Kishimoto, Shonen Jump (Rp. 30000) - 100 Halaman.
-        $str = "{$this->$tipe} : {$this->$judul} | {$this->$getLabel()} (Rp. {$this->$harga})";
-        return $str;
+    public function helloWorld() {
+        return "Hello World!";
     }
 
+    public function getInfoProduk() {
+        $str = "{$this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
+        return $str;
+    }
 }
 
 class Komik extends Produk {
-    public function getInfoKomik() {
-        // Komik : Naruto | Masashi Kishimoto, Shonen Jump (Rp. 30000) - 100 Halaman.
-        $str = "Komik : {$this->getInfoProduk()} - {$this->$jmlHalaman} Halaman.";
+    public $jmlHalaman;
+
+    public function __construct($judul = "Judul", $penulis = "Penulis", $penerbit = "Penerbit", $harga = 0, $jmlHalaman = 0)
+    {
+        parent::__construct($judul, $penulis, $penerbit, $harga);
+        $this->jmlHalaman = $jmlHalaman;
+    }
+
+    public function getInfoProduk() {
+        $str = "Komik : " . parent::getInfoProduk() . " ~ {$this->jmlHalaman} Halaman.";
         return $str;
     }
 }
 
 class Game extends Produk {
-    public function getInfoGame() {
-        // Game : Uncharted | Neil Druckmann, Sony Computer (Rp. 250000) - 50 Jam.
-        $str = "Game : {$this->$judul} | {$this->$getLabel()} (Rp. {$this->$harga}) - {$this->$waktuMain} Jam.";
+    public $waktuMain;
+
+    public function __construct($judul = "Judul", $penulis = "Penulis", $penerbit = "Penerbit", $harga = 0, $waktuMain = 0)
+    {
+        parent::__construct($judul, $penulis, $penerbit, $harga);
+        $this->waktuMain = $waktuMain;
+    }
+
+
+    public function getInfoProduk() {
+        $str = "Game : " . parent::getInfoProduk() . " ~ {$this->waktuMain} Jam.";
         return $str;
     }
 }
@@ -53,12 +66,24 @@ class CetakInfoProduk {
     }
 }
 
+$produk3 = new Komik("Naruto", "Masashi Kishimoto", "Shonen Jump", 45000, 100, 0, "Komik");
 
-$produk1 = new Komik("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000, 100, 0, "Komik");
-$produk2 = new Game("Uncharted", "Neil Druckmann", "Sony Computer", 250000, 0, 50, "Game");
+$produk4 = new Game("osu!", "peppy", "peppy", 0, 0, 500, "Game");
 
-echo $produk1->getInfoKomik();
+echo "<hr>";
+
+echo "Komik : $produk3->judul, $produk3->penulis";
 echo "<br>";
-echo $produk2->getInfoProduk();
+echo $produk3->getLabel();
 
+echo "<hr>";
+
+echo "Komik : $produk4->judul, $produk4->penulis";
+echo "<br>";
+echo $produk4->getLabel();
+
+echo "<hr>";
+echo $produk3->getInfoProduk();
+echo "<br>";
+echo $produk4->getInfoProduk();
 ?>

@@ -15,9 +15,9 @@ class Produk {
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
-        $this->$jmlHalaman = $jmlHalaman;
-        $this->$waktuMain = $waktuMain;
-        $this->$tipe = $tipe;
+        $this->jmlHalaman = $jmlHalaman;
+        $this->waktuMain = $waktuMain;
+        $this->tipe = $tipe;
     }
 
     public function getLabel() {
@@ -26,11 +26,11 @@ class Produk {
 
     public function getInfoLengkap() {
         // Komik : Naruto | Masashi Kishimoto, Shonen Jump (Rp. 30000) - 100 Halaman.
-        $str = "{$this->$tipe} : {$this->$judul} | {$this->$getLabel()} (Rp. {$this->$harga})";
-        if ($this->$tipe == "Komik") {
-            $str .= " - {$this->$jmlHalaman} Halaman.";
-        } else if ($this->$tipe == "Game") {
-            $str .= " ~ {$this->$waktuMain} Jam.";
+        $str = "{$this->tipe} : {$this->judul} | {$this->getLabel()} (Rp. {this->$harga})";
+        if ($this->tipe == "Komik") {
+            $str .= " - {$this->jmlHalaman} Halaman.";
+        } else if ($this->tipe == "Game") {
+            $str .= " ~ {$this->waktuMain} Jam.";
         }
 
         return $str;
